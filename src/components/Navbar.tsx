@@ -88,6 +88,7 @@ const Navbar: React.FC = () => {
 
   // Close dropdowns when clicking outside
   useEffect(() => {
+    // Existing click-outside handler
     const handleClickOutside = (event: MouseEvent) => {
       const navLinks = document.querySelectorAll(".navbar-link-container");
       navLinks.forEach((link) => {
@@ -108,10 +109,38 @@ const Navbar: React.FC = () => {
     };
 
     document.addEventListener("click", handleClickOutside);
+
+    // New height equalization code
+    const handleHeightEqualization = (item: Element) => {
+      const primary = item.querySelector(".dropdown-primary-panel");
+      const secondary = item.querySelector(".dropdown-secondary-panel");
+      if (!primary || !secondary) return;
+
+      const maxHeight = Math.max(
+        primary.getBoundingClientRect().height,
+        secondary.getBoundingClientRect().height
+      );
+      (primary as HTMLElement).style.minHeight = `${maxHeight}px`;
+      (secondary as HTMLElement).style.minHeight = `${maxHeight}px`;
+    };
+
+    const equalizeElements = document.querySelectorAll(".has-secondary");
+    const mouseEnterHandlers = Array.from(equalizeElements).map((item) => {
+      const handler = () => handleHeightEqualization(item);
+      item.addEventListener("mouseenter", handler);
+      return { item, handler };
+    });
+
+    // Cleanup function
     return () => {
       document.removeEventListener("click", handleClickOutside);
+
+      // Remove height equalization listeners
+      mouseEnterHandlers.forEach(({ item, handler }) => {
+        item.removeEventListener("mouseenter", handler);
+      });
     };
-  }, [activeDropdown]);
+  }, [activeDropdown]); // Preserve existing dependency
 
   // Toggle dropdown on click
   const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {

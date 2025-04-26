@@ -172,11 +172,12 @@ button {
   display: flex;
   align-items: center;
   width: 100%;
-  justify-content: center;
+  /* justify-content: center; */
   gap: 16px;
   flex-wrap: nowrap;
   overflow: visible; /* Changed from default */
   position: relative;
+  right: 181px;
 }
 
 .navbar-link-container {
@@ -188,7 +189,7 @@ button {
 .navbar-link {
   font-size: 14px;
   color: #222;
-  padding: 0 8px;
+  padding: 0px 16px;
   cursor: pointer;
   white-space: nowrap;
   transition: color 0.2s;
@@ -213,7 +214,6 @@ button {
   min-width: 220px;
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
   z-index: 1000;
   padding: 8px 0;
   margin-top: 8px;
@@ -451,9 +451,44 @@ button {
 .navbar-link-container.active .navbar-link {
   color: #0076CE;
   border-bottom: 3px solid #707070;
-  padding-bottom: 5px;
+  padding-bottom: 25px;
   font-weight: 500;
 }
+
+/* Base Styles */
+
+
+
+/* Right-expanding Secondary Dropdowns */
+.dropdown-secondary-panel {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background: white;
+  min-width: 240px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  max-height: 0;
+  overflow: visible;
+  transition: max-height 0.3s ease;
+}
+
+.has-secondary:hover .dropdown-secondary-panel {
+  max-height: 1000px; /* Adjust based on content */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .navbar-dropdown {
+    min-width: 200px;
+  }
+  
+  .dropdown-secondary-panel {
+    left: auto;
+    right: 0;
+  }
+}
+
 
 
 
