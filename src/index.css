@@ -448,9 +448,12 @@ button {
   padding: 20px 0;
   text-align: center;
 }
-
-
-
+.navbar-link-container.active .navbar-link {
+  color: #0076CE;
+  border-bottom: 3px solid #707070;
+  padding-bottom: 5px;
+  font-weight: 500;
+}
 
 
 
