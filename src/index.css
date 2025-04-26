@@ -13,6 +13,7 @@ html, body, #root {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: #0a1533;
   color: #fff;
+  overflow-x: hidden;
 }
 
 body {
@@ -30,51 +31,88 @@ button {
   cursor: pointer;
 }
 
-/* Updated Navbar styles with dropdown support and improved search */
 
-/* Base navbar styles - keep existing styles and add these: */
+
+
+
+
+/*  navbar css */
 .navbar {
   width: 100%;
+  max-width: 100%;
   background: #fff;
   color: #222;
   box-shadow: 0 2px 4px rgba(10, 21, 51, 0.04);
   position: sticky;
   top: 0;
   z-index: 100;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Top row container */
+.navbar-top {
+  width: 100%;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+/* Bottom row container */
+.navbar-bottom {
+  width: 100%;
+  width: 100%;
+  z-index: 40;
+  overflow: visible;
+  position: relative;
+}
+
+/* Common content container for both rows */
 .navbar-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 32px;
-  height: 64px;
+  overflow: visible;
 }
 
+/* Top row content height */
+.navbar-top .navbar-content {
+  height: 60px;
+}
+
+/* Bottom row content height */
+.navbar-bottom .navbar-content {
+  height: 48px;
+}
+
+/* Left section (logo and search) */
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 24px;
 }
 
+/* Logo styling */
 .navbar-logo {
   height: 32px;
   width: auto;
-  margin-right: 16px;
 }
 
 /* Improved search bar styles */
 .navbar-search {
   display: flex;
   align-items: center;
-  background: #f5f6fa;
-  border-radius: 4px;
+  background: #ffffff; /* Changed to white background */
+  border-radius: 0; /* Removed border radius */
+  border: 1px solid #000000; /* Added solid black border */
   padding: 2px 8px;
   height: 36px;
   position: relative;
   transition: all 0.2s ease;
+  width: 280px; /* Increased width from 180px to make it longer */
 }
 
 .navbar-search.focused {
@@ -84,11 +122,11 @@ button {
 
 .navbar-search-input {
   border: none;
-  background: transparent;
+  background: transparent; /* Ensures the input background is transparent */
   outline: none;
-  font-size: 15px;
+  font-size: 14px;
   color: #222;
-  width: 180px;
+  width: 240px; /* Increased to fill the wider search bar */
   padding: 6px 0;
 }
 
@@ -129,22 +167,26 @@ button {
   width: 16px;
 }
 
-/* Navbar center with dropdown styles */
+/* Main navigation links container - now in bottom row */
 .navbar-center {
   display: flex;
   align-items: center;
-  gap: 18px;
-  flex: 1 1 auto;
+  width: 100%;
   justify-content: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+  overflow: visible; /* Changed from default */
+  position: relative;
 }
 
 .navbar-link-container {
   position: relative;
   cursor: pointer;
+  overflow: visible;
 }
 
 .navbar-link {
-  font-size: 15px;
+  font-size: 14px;
   color: #222;
   padding: 0 8px;
   cursor: pointer;
@@ -154,9 +196,9 @@ button {
 }
 
 .dropdown-arrow {
-  font-size: 10px;
-  margin-left: 2px;
-  vertical-align: middle;
+  font-size: 8px;
+  margin-left: 4px;
+  display: inline-block;
 }
 
 .navbar-link:hover {
@@ -166,7 +208,7 @@ button {
 .navbar-dropdown {
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   left: 0;
   min-width: 220px;
   background: white;
@@ -199,16 +241,16 @@ button {
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
+  flex-shrink: 0;
 }
 
 .navbar-icon {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  color: #707070;
-  cursor: pointer;
+  padding: 6px 10px;
+  transition: background-color 0.2s, color 0.2s;
+  border-radius: 4px;
 }
 
 .navbar-contact-icon,
@@ -222,8 +264,199 @@ button {
   margin-left: 2px;
 }
 
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .navbar-icon-label {
+    display: none;
+  }
+  
+  .navbar-center {
+    gap: 12px;
+  }
+  
+  .navbar-content {
+    padding: 0 16px;
+  }
+}
 
-/* Hero Section styles */
+@media (max-width: 900px) {
+  .navbar-center {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .navbar-center::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .navbar-search {
+    width: 140px;
+  }
+  
+  .navbar-search-input {
+    width: 100px;
+  }
+}
+
+/* Page overlay for dropdown focus */
+.page-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 90;
+  pointer-events: none;
+}
+
+/* Dropdown arrow rotation */
+.dropdown-arrow {
+  font-size: 8px;
+  margin-left: 4px;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* Navbar icon hover and active states */
+.navbar-icon {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 0;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.navbar-icon:not(.navbar-contact):hover,
+.navbar-icon.active {
+  background-color: #e9e9e9;
+}
+
+.navbar-contact:hover {
+  color: #000;
+}
+
+.navbar-contact:hover .navbar-contact-icon path,
+.navbar-contact:hover .navbar-icon-label {
+  color: #000;
+}
+
+/* Dropdown styling for Sign In and Cart */
+.navbar-icon-dropdown {
+  position: relative;
+}
+
+.signin-dropdown,
+.cart-dropdown {
+  position: absolute;
+  top: 100%;
+  right: -40px;
+  background: white;
+  min-width: 270px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  z-index: 1000;
+  border-radius: 4px;
+  margin-top: 8px;
+  display: none;
+}
+
+/* Make sure active dropdowns are visible */
+.navbar-icon-dropdown.active .signin-dropdown,
+.navbar-icon-dropdown.active .cart-dropdown {
+  display: block;
+}
+
+.signin-dropdown h3,
+.cart-dropdown h3 {
+  color: #444;
+  font-size: 18px;
+  margin: 0 0 16px 0;
+  font-weight: 500;
+}
+
+.section-title {
+  font-weight: 500;
+  margin: 8px 0;
+  color: #444;
+}
+
+.account-benefits {
+  list-style-type: disc;
+  padding-left: 24px;
+  margin: 12px 0 20px;
+  color: #555;
+  font-size: 14px;
+}
+
+.account-benefits li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* Sign In dropdown buttons */
+.dropdown-signin-btn,
+.dropdown-create-btn,
+.dropdown-premier-btn,
+.dropdown-partner-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 2px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: center;
+}
+
+.dropdown-signin-btn {
+  background-color: #0076CE;
+  color: white;
+}
+
+.dropdown-signin-btn:hover {
+  background-color: #005ea3;
+}
+
+.dropdown-create-btn,
+.dropdown-premier-btn,
+.dropdown-partner-btn {
+  background-color: #e6f2f8;
+  color: #0076CE;
+  border: 1px solid #e0e0e0;
+}
+
+.dropdown-create-btn:hover,
+.dropdown-premier-btn:hover,
+.dropdown-partner-btn:hover {
+  background-color: #d6edf7;
+}
+
+/* Cart dropdown specific styles */
+.cart-empty-message {
+  color: #666;
+  font-size: 14px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+/* Hero Section css */
 .hero-section {
   width: 100%;
   min-height: 540px;

@@ -34,8 +34,9 @@ const CrossIcon = ({ onClick }: { onClick: () => void }) => (
 const Navbar: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-
+  
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
@@ -55,6 +56,15 @@ const Navbar: React.FC = () => {
     setIsSearchFocused(false);
   };
 
+  // Handle dropdown toggling
+  const handleDropdownToggle = (dropdown: string) => {
+    if (activeDropdown === dropdown) {
+      setActiveDropdown(null);
+    } else {
+      setActiveDropdown(dropdown);
+    }
+  };
+
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -64,13 +74,18 @@ const Navbar: React.FC = () => {
           link.classList.remove('active');
         }
       });
+      
+      const topIcons = document.querySelectorAll('.navbar-icon-dropdown');
+      if (activeDropdown && !Array.from(topIcons).some(icon => icon.contains(event.target as Node))) {
+        setActiveDropdown(null);
+      }
     };
 
     document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  }, [activeDropdown]);
 
   // Toggle dropdown on click
   const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -88,104 +103,144 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="navbar">
-      <nav className="navbar-content">
-        <div className="navbar-left">
-          <img src={dellLogo} alt="Dell Technologies Logo" className="navbar-logo" />
-          <div className={`navbar-search ${isSearchFocused ? 'focused' : ''}`}>
-            <input
-              ref={searchInputRef}
-              type="text"
-              placeholder="Search Dell"
-              className="navbar-search-input"
-              value={searchInput}
-              onChange={handleSearchChange}
-              onFocus={handleSearchFocus}
-              onBlur={handleSearchBlur}
-            />
-            {searchInput && <CrossIcon onClick={clearSearch} />}
-            <button className="navbar-search-btn">
-              <SearchIcon />
-            </button>
+    <>
+      {activeDropdown && <div className="page-overlay"></div>}
+      <header className="navbar">
+        <div className="navbar-top">
+          <div className="navbar-content">
+            <div className="navbar-left">
+              <img src={dellLogo} alt="Dell Technologies Logo" className="navbar-logo" />
+              <div className={`navbar-search ${isSearchFocused ? 'focused' : ''}`}>
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  placeholder="Search Dell"
+                  className="navbar-search-input"
+                  value={searchInput}
+                  onChange={handleSearchChange}
+                  onFocus={handleSearchFocus}
+                  onBlur={handleSearchBlur}
+                />
+                {searchInput && <CrossIcon onClick={clearSearch} />}
+                <button className="navbar-search-btn">
+                  <SearchIcon />
+                </button>
+              </div>
+            </div>
+            <div className="navbar-right">
+              <span 
+                className={`navbar-icon navbar-icon-dropdown ${activeDropdown === 'signin' ? 'active' : ''}`}
+                onClick={() => handleDropdownToggle('signin')}
+              >
+                <SignInIcon />
+                <span className="navbar-icon-label">Sign In <span className={`dropdown-arrow ${activeDropdown === 'signin' ? 'rotated' : ''}`}>▼</span></span>
+                
+                {activeDropdown === 'signin' && (
+                  <div className="navbar-dropdown signin-dropdown">
+                    <h3>Welcome to Dell</h3>
+                    <div className="my-account-section">
+                      <p className="section-title">My Account</p>
+                      <ul className="account-benefits">
+                        <li>Place orders quickly and easily</li>
+                        <li>View orders and track your shipping status</li>
+                        <li>Create and access a list of your products</li>
+                      </ul>
+                    </div>
+                    <button className="dropdown-signin-btn">Sign In</button>
+                    <button className="dropdown-create-btn">Create an Account</button>
+                    <button className="dropdown-premier-btn">Premier Sign In</button>
+                    <button className="dropdown-partner-btn">Partner Program Sign In</button>
+                  </div>
+                )}
+              </span>
+              <span className="navbar-icon navbar-contact">
+                <img src={contactUsIcon} alt="Contact Us" className="navbar-contact-icon" />
+                <span className="navbar-icon-label">Contact Us</span>
+              </span>
+              <span className="navbar-icon navbar-icon-dropdown">
+                <img src={worldIcon} alt="World" className="navbar-world-icon" />
+                <span className="navbar-icon-label">IN/EN</span>
+              </span>
+              <span 
+                className={`navbar-icon navbar-icon-dropdown ${activeDropdown === 'cart' ? 'active' : ''}`}
+                onClick={() => handleDropdownToggle('cart')}
+              >
+                <CartIcon />
+                <span className="navbar-icon-label">Cart <span className={`dropdown-arrow ${activeDropdown === 'cart' ? 'rotated' : ''}`}>▼</span></span>
+                
+                {activeDropdown === 'cart' && (
+                  <div className="navbar-dropdown cart-dropdown">
+                    <h3>Your Dell.com Carts</h3>
+                    <p className="cart-empty-message">Your cart is empty</p>
+                  </div>
+                )}
+              </span>
+            </div>
           </div>
         </div>
-        <div className="navbar-center">
-          <div className="navbar-link-container" onClick={toggleDropdown}>
-            <span className="navbar-link">Artificial Intelligence <span className="dropdown-arrow">▼</span></span>
-            <div className="navbar-dropdown">
-              <a href="#" className="dropdown-item">AI Solutions</a>
-              <a href="#" className="dropdown-item">Machine Learning</a>
-              <a href="#" className="dropdown-item">Neural Networks</a>
-              <a href="#" className="dropdown-item">Data Analytics</a>
+        <div className="navbar-bottom">
+          <div className="navbar-content">
+            <div className="navbar-center">
+              <div className="navbar-link-container" onClick={toggleDropdown}>
+                <span className="navbar-link">Artificial Intelligence <span className="dropdown-arrow">▼</span></span>
+                <div className="navbar-dropdown">
+                  <a href="#" className="dropdown-item">AI Solutions</a>
+                  <a href="#" className="dropdown-item">Machine Learning</a>
+                  <a href="#" className="dropdown-item">Neural Networks</a>
+                  <a href="#" className="dropdown-item">Data Analytics</a>
+                </div>
+              </div>
+              <div className="navbar-link-container" onClick={toggleDropdown}>
+                <span className="navbar-link">IT Infrastructure <span className="dropdown-arrow">▼</span></span>
+                <div className="navbar-dropdown">
+                  <a href="#" className="dropdown-item">Servers</a>
+                  <a href="#" className="dropdown-item">Storage</a>
+                  <a href="#" className="dropdown-item">Networking</a>
+                  <a href="#" className="dropdown-item">Data Protection</a>
+                </div>
+              </div>
+              <div className="navbar-link-container" onClick={toggleDropdown}>
+                <span className="navbar-link">Computers & Accessories <span className="dropdown-arrow">▼</span></span>
+                <div className="navbar-dropdown">
+                  <a href="#" className="dropdown-item">Laptops</a>
+                  <a href="#" className="dropdown-item">Desktops</a>
+                  <a href="#" className="dropdown-item">Monitors</a>
+                  <a href="#" className="dropdown-item">Accessories</a>
+                </div>
+              </div>
+              <div className="navbar-link-container" onClick={toggleDropdown}>
+                <span className="navbar-link">Services <span className="dropdown-arrow">▼</span></span>
+                <div className="navbar-dropdown">
+                  <a href="#" className="dropdown-item">Consulting</a>
+                  <a href="#" className="dropdown-item">Deployment</a>
+                  <a href="#" className="dropdown-item">Support</a>
+                  <a href="#" className="dropdown-item">Training</a>
+                </div>
+              </div>
+              <div className="navbar-link-container" onClick={toggleDropdown}>
+                <span className="navbar-link">Support <span className="dropdown-arrow">▼</span></span>
+                <div className="navbar-dropdown">
+                  <a href="#" className="dropdown-item">Drivers & Downloads</a>
+                  <a href="#" className="dropdown-item">Manuals</a>
+                  <a href="#" className="dropdown-item">Warranty</a>
+                  <a href="#" className="dropdown-item">Contact Support</a>
+                </div>
+              </div>
+              <div className="navbar-link-container" onClick={toggleDropdown}>
+                <span className="navbar-link">Deals <span className="dropdown-arrow">▼</span></span>
+                <div className="navbar-dropdown">
+                  <a href="#" className="dropdown-item">Laptop Deals</a>
+                  <a href="#" className="dropdown-item">Desktop Deals</a>
+                  <a href="#" className="dropdown-item">Monitor Deals</a>
+                  <a href="#" className="dropdown-item">All Deals</a>
+                </div>
+              </div>
+              <span className="navbar-link">Find a Store</span>
             </div>
           </div>
-          <div className="navbar-link-container" onClick={toggleDropdown}>
-            <span className="navbar-link">IT Infrastructure <span className="dropdown-arrow">▼</span></span>
-            <div className="navbar-dropdown">
-              <a href="#" className="dropdown-item">Servers</a>
-              <a href="#" className="dropdown-item">Storage</a>
-              <a href="#" className="dropdown-item">Networking</a>
-              <a href="#" className="dropdown-item">Data Protection</a>
-            </div>
-          </div>
-          <div className="navbar-link-container" onClick={toggleDropdown}>
-            <span className="navbar-link">Computers & Accessories <span className="dropdown-arrow">▼</span></span>
-            <div className="navbar-dropdown">
-              <a href="#" className="dropdown-item">Laptops</a>
-              <a href="#" className="dropdown-item">Desktops</a>
-              <a href="#" className="dropdown-item">Monitors</a>
-              <a href="#" className="dropdown-item">Accessories</a>
-            </div>
-          </div>
-          <div className="navbar-link-container" onClick={toggleDropdown}>
-            <span className="navbar-link">Services <span className="dropdown-arrow">▼</span></span>
-            <div className="navbar-dropdown">
-              <a href="#" className="dropdown-item">Consulting</a>
-              <a href="#" className="dropdown-item">Deployment</a>
-              <a href="#" className="dropdown-item">Support</a>
-              <a href="#" className="dropdown-item">Training</a>
-            </div>
-          </div>
-          <div className="navbar-link-container" onClick={toggleDropdown}>
-            <span className="navbar-link">Support <span className="dropdown-arrow">▼</span></span>
-            <div className="navbar-dropdown">
-              <a href="#" className="dropdown-item">Drivers & Downloads</a>
-              <a href="#" className="dropdown-item">Manuals</a>
-              <a href="#" className="dropdown-item">Warranty</a>
-              <a href="#" className="dropdown-item">Contact Support</a>
-            </div>
-          </div>
-          <div className="navbar-link-container" onClick={toggleDropdown}>
-            <span className="navbar-link">Deals <span className="dropdown-arrow">▼</span></span>
-            <div className="navbar-dropdown">
-              <a href="#" className="dropdown-item">Laptop Deals</a>
-              <a href="#" className="dropdown-item">Desktop Deals</a>
-              <a href="#" className="dropdown-item">Monitor Deals</a>
-              <a href="#" className="dropdown-item">All Deals</a>
-            </div>
-          </div>
-          <span className="navbar-link">Find a Store</span>
         </div>
-        <div className="navbar-right">
-          <span className="navbar-icon">
-            <SignInIcon />
-            <span className="navbar-icon-label">Sign In</span>
-          </span>
-          <span className="navbar-icon">
-            <img src={contactUsIcon} alt="Contact Us" className="navbar-contact-icon" />
-            <span className="navbar-icon-label">Contact Us</span>
-          </span>
-          <span className="navbar-icon">
-            <img src={worldIcon} alt="World" className="navbar-world-icon" />
-            <span className="navbar-icon-label">IN/EN</span>
-          </span>
-          <span className="navbar-icon">
-            <CartIcon />
-            <span className="navbar-icon-label">Cart</span>
-          </span>
-        </div>
-      </nav>
-    </header>
+      </header>
+    </>
   );
 };
 
