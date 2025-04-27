@@ -1,0 +1,246 @@
+/* src/styles/BenefitsSection.css */
+.benefits-section {
+    background-color: #0a1533;
+    color: #ffffff;
+    padding: 80px 0;
+    width: 100%;
+  }
+  
+  .benefits-title {
+    font-size: 42px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  
+  .video-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 80px;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    aspect-ratio: 16/9;
+  }
+  
+  .thumbnail-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    border: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .play-button:hover {
+    background-color: rgba(0, 118, 206, 0.9);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  
+  .play-button svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .benefits-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+  
+  .benefits-video.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .benefits-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .benefit-card {
+    background-color: #1d2b47;
+    padding: 32px 24px;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+  }
+  
+  .benefit-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  
+  .smart-icon {
+    background-color: #0076CE;
+  }
+  
+  .sustainable-icon {
+    background-color: #00A03C;
+  }
+  
+  .security-icon {
+    background-color: #E31937;
+  }
+  
+  .multicloud-icon {
+    background-color: #6A09C7;
+  }
+  
+  .benefit-card h3 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #ffffff;
+  }
+  
+  .benefit-card p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #b0b8c1;
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+  
+  .benefit-link {
+    color: #0076CE;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+  }
+  
+  .benefit-link:hover {
+    text-decoration: underline;
+  }
+  
+  .external-icon {
+    margin-left: 6px;
+    font-size: 14px;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 1200px) {
+    .benefits-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .benefits-cards {
+      grid-template-columns: 1fr;
+    }
+    
+    .benefits-title {
+      font-size: 32px;
+      padding: 0 24px;
+    }
+    
+    .video-container {
+      margin: 0 24px 48px;
+      width: calc(100% - 48px);
+    }
+  }
+  
+
+  /* Custom Plyr styles */
+:root {
+  --plyr-color-main: #0076CE; /* Dell blue color for highlights */
+  --plyr-video-background: #000000;
+  --plyr-video-controls-background: rgba(0, 0, 0, 0.8);
+  --plyr-control-radius: 2px;
+  --plyr-control-icon-size: 18px;
+  --plyr-control-spacing: 5px; /* Reduce spacing between controls */
+  --plyr-range-thumb-height: 10px; /* Smaller thumb for progress */
+  --plyr-range-track-height: 2px; /* Thinner progress bar */
+}
+
+
+.plyr__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.plyr__video-embed {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Make sure iframe fills container */
+.plyr__video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Ensure the progress bar is more visible */
+.plyr--video .plyr__progress__buffer {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.plyr--full-ui input[type="range"] {
+  color: var(--plyr-color-main);
+}
+
+/* Ensure the video container maintains aspect ratio */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+}
+
+.plyr {
+  height: 100%;
+}

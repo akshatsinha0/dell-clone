@@ -13,7 +13,15 @@ const StickyNavbar: React.FC<StickyNavbarProps> = ({
 }) => {
   const [visible, setVisible] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
-  const firstCallRef = useRef(true); // Track initial callback to avoid flash
+  const firstCallRef = useRef(true);
+  
+  // Track internally which section is active to ensure immediate updates on click
+  const [internalActiveSection, setInternalActiveSection] = useState(activeSectionId);
+  
+  // Update internal state when prop changes
+  useEffect(() => {
+    setInternalActiveSection(activeSectionId);
+  }, [activeSectionId]);
 
   useEffect(() => {
     const statsSection = document.getElementById('stats-section');
@@ -48,6 +56,15 @@ const StickyNavbar: React.FC<StickyNavbarProps> = ({
     };
   }, []);
 
+  // Enhanced click handler for navigation
+  const handleNavClick = (sectionId: string) => {
+    // Immediately update internal active state for visual feedback
+    setInternalActiveSection(sectionId);
+    
+    // Scroll to the section
+    scrollToSection(sectionId);
+  };
+
   const sections = [
     { id: 'products', label: 'Products' },
     { id: 'benefits', label: 'Benefits' },
@@ -67,8 +84,8 @@ const StickyNavbar: React.FC<StickyNavbarProps> = ({
           {sections.map(section => (
             <button
               key={section.id}
-              className={`sticky-navbar-link ${activeSectionId === section.id ? 'active' : ''}`}
-              onClick={() => scrollToSection(section.id)}
+              className={`sticky-navbar-link ${internalActiveSection === section.id ? 'active' : ''}`}
+              onClick={() => handleNavClick(section.id)}
             >
               {section.label}
             </button>

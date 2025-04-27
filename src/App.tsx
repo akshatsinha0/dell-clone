@@ -6,6 +6,7 @@ import FeaturesSection from './components/FeaturesSection';
 import StatsSection from './components/StatsSection';
 import StickyNavbar from './components/StickyNavbar';
 import ProductsSection from './components/sections/ProductsSection';
+import BenefitsSection from './components/sections/BenefitsSection';
 import StickyContactButton from './components/StickyContactButton';
 import './index.css';
 
@@ -32,41 +33,45 @@ const App: React.FC = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(sectionId);
     }
   };
 
-  // Detect active section based on scroll position
+  // Detect active section based on scroll position with improved accuracy
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100; // Add offset for better detection
+      // Get viewport middle point for better detection
+      const viewportHeight = window.innerHeight;
+      const viewportMiddle = viewportHeight / 2;
       
-      // Check each section's position
-      let currentSection = 'products'; // Default
-      Object.entries(sectionRefs).forEach(([id, ref]) => {
-        if (ref.current) {
-          const element = ref.current;
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
-          
-          if (
-            scrollPosition >= offsetTop && 
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            if (id !== 'hero' && id !== 'features' && id !== 'stats') {
-              currentSection = id;
+      // Check sections in priority order
+      const sectionsToCheck = ['products', 'benefits', 'demo', 'workloads', 'offerings', 'resources', 'reviews'];
+      
+      // Find the section that contains the middle of the viewport
+      for (const id of sectionsToCheck) {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= viewportMiddle && rect.bottom >= viewportMiddle) {
+            // This section contains the middle of the viewport
+            if (id !== activeSection) {
+              setActiveSection(id);
             }
+            return;
           }
         }
-      });
-      
-      setActiveSection(currentSection);
+      }
     };
     
     window.addEventListener('scroll', handleScroll);
+    
+    // Run once on mount to set initial active section
+    handleScroll();
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [sectionRefs]);
+  }, [activeSection]);
 
   return (
     <div className="app-container">
@@ -87,6 +92,9 @@ const App: React.FC = () => {
         </section>
         <section id="products" ref={sectionRefs.products}>
           <ProductsSection />
+        </section>
+        <section id="benefits" ref={sectionRefs.benefits}>
+          <BenefitsSection />
         </section>
         {/* Add more sections here as you create them */}
       </main>

@@ -58,7 +58,7 @@
   }
   
   .sticky-navbar-link.active {
-    background-color: #222;
+    background-color: rgb(0, 0, 0);
     color: white;
   }
   
