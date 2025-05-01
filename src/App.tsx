@@ -7,6 +7,8 @@ import StatsSection from './components/StatsSection';
 import StickyNavbar from './components/StickyNavbar';
 import ProductsSection from './components/sections/ProductsSection';
 import BenefitsSection from './components/sections/BenefitsSection';
+import DemoSection from './components/sections/DemoSection';
+import WorkloadsSection from './components/sections/WorkloadsSection';
 import StickyContactButton from './components/StickyContactButton';
 import './index.css';
 
@@ -27,7 +29,6 @@ const App: React.FC = () => {
     reviews: useRef<HTMLElement>(null)
   };
   
-
   // Scroll to section function
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -95,6 +96,12 @@ const App: React.FC = () => {
         </section>
         <section id="benefits" ref={sectionRefs.benefits}>
           <BenefitsSection />
+        </section>
+        <section id="demo" ref={sectionRefs.demo}>
+          <DemoSection />
+        </section>
+        <section id="workloads" ref={sectionRefs.workloads}>
+          <WorkloadsSection />
         </section>
         {/* Add more sections here as you create them */}
       </main>

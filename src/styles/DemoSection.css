@@ -1,0 +1,160 @@
+/* src/styles/DemoSection.css */
+.demo-section {
+    background-color: #0a1533;
+    color: #ffffff;
+    padding: 80px 0 100px;
+    width: 100%;
+  }
+  
+  .demo-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  
+  .demo-title {
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .demo-subtitle {
+    font-size: 18px;
+    color: #e4e8ee;
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  
+  .demo-sections-container {
+    display: flex;
+    gap: 0;
+  }
+  
+  .demo-left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  
+  .demo-right-content {
+    flex: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .demo-image {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  
+  .demo-collapsible-section {
+    background-color: rgba(29, 43, 71, 0.7);
+    margin-bottom: 1px;
+    border-bottom: none;
+  }
+  
+  .demo-section-header {
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  
+  .demo-section-header.active {
+    background-color: rgba(29, 43, 71, 0.9);
+  }
+  
+  .demo-section-header.active .demo-section-title {
+    color: #ffffff;
+  }
+  
+  .demo-section-title {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+    transition: color 0.2s ease;
+    color: #ffffff;
+  }
+  
+  .demo-section-arrow {
+    font-size: 12px;
+    color: #ffffff;
+    transition: transform 0.3s ease;
+  }
+  
+  .demo-section-content {
+    padding: 0 32px 24px;
+    animation: fadeIn 0.3s ease;
+    background-color: rgba(29, 43, 71, 0.9);
+  }
+  
+  .demo-section-description {
+    font-size: 16px;
+    color: #e4e8ee;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  
+  .demo-button {
+    background-color: #ffffff;
+    color: #0a1533;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: center;
+    display: inline-block;
+    min-width: 180px;
+  }
+  
+  .demo-button:hover {
+    background-color: #e4e8ee;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 992px) {
+    .demo-sections-container {
+      flex-direction: column;
+    }
+    
+    .demo-title {
+      font-size: 28px;
+    }
+    
+    .demo-subtitle {
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+    
+    .demo-section-title {
+      font-size: 22px;
+    }
+    
+    .demo-right-content {
+      margin-top: 30px;
+    }
+  }
+  
