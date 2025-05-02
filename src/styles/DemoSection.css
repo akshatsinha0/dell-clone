@@ -1,6 +1,6 @@
 /* src/styles/DemoSection.css */
 .demo-section {
-    background-color: #0a1533;
+    background-color: #293b4d;
     color: #ffffff;
     padding: 80px 0 100px;
     width: 100%;
@@ -70,7 +70,7 @@
   }
   
   .demo-section-header.active {
-    background-color: rgba(29, 43, 71, 0.9);
+    background-color: #1d2c3b
   }
   
   .demo-section-header.active .demo-section-title {
@@ -94,7 +94,7 @@
   .demo-section-content {
     padding: 0 32px 24px;
     animation: fadeIn 0.3s ease;
-    background-color: rgba(29, 43, 71, 0.9);
+    background-color: #1d2c3b;
   }
   
   .demo-section-description {

@@ -1,6 +1,6 @@
 /* src/styles/BenefitsSection.css */
 .benefits-section {
-    background-color: #0a1533;
+    background-color: #1d2c3b;
     color: #ffffff;
     padding: 80px 0;
     width: 100%;
@@ -89,7 +89,7 @@
   }
   
   .benefit-card {
-    background-color: #1d2b47;
+    background-color: #293b4d;
     padding: 32px 24px;
     border-radius: 0;
     display: flex;

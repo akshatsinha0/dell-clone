@@ -9,6 +9,9 @@ import ProductsSection from './components/sections/ProductsSection';
 import BenefitsSection from './components/sections/BenefitsSection';
 import DemoSection from './components/sections/DemoSection';
 import WorkloadsSection from './components/sections/WorkloadsSection';
+import OfferingsSection from './components/sections/OfferingsSection';
+import ResourcesSection from './components/sections/ResourcesSection';
+
 import StickyContactButton from './components/StickyContactButton';
 import './index.css';
 
@@ -102,6 +105,12 @@ const App: React.FC = () => {
         </section>
         <section id="workloads" ref={sectionRefs.workloads}>
           <WorkloadsSection />
+        </section>
+        <section id="offerings" ref={sectionRefs.offerings}>
+          <OfferingsSection />
+        </section>
+        <section id="resources" ref={sectionRefs.resources}>
+          <ResourcesSection />
         </section>
         {/* Add more sections here as you create them */}
       </main>
