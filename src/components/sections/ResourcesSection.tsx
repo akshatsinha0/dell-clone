@@ -52,6 +52,7 @@ const ResourcesSection: React.FC = () => {
   // Labs and Webinars data
   const labsWebinarsData = [
     {
+      image: null,
       tag: "LAB",
       title: "Hands-on Labs",
       description: "Sign up to test drive Dell infrastructure products and solutions for free in a real-time, user-friendly environment.",
@@ -59,6 +60,7 @@ const ResourcesSection: React.FC = () => {
       link: "#"
     },
     {
+      image: null,
       tag: "LIBRARY",
       title: "Storage Blogs",
       description: "Learn how modern workload solutions powered by data storage products from Dell Technologies drive business success for your digital future.",
@@ -66,6 +68,7 @@ const ResourcesSection: React.FC = () => {
       link: "#"
     },
     {
+      image: null,
       tag: "LIBRARY",
       title: "Storage Webinars and Events",
       description: "Register for and explore on demand events to gain expertise and industry insight for the latest technology trends.",
