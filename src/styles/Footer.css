@@ -1,0 +1,311 @@
+/* src/styles/Footer.css */
+.dell-footer {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #444;
+    width: 100%;
+  }
+  
+  /* Multi-step feedback system styles */
+  .footer-rating-section {
+    background-color: #002044;
+    color: white;
+    padding: 30px 0;
+    position: relative;
+  }
+  
+  .step-indicator {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: white;
+    color: #002044;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .rating-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+  }
+  
+  .rating-container p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .rating-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .rating-label {
+    width: 140px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 15px;
+    margin: 0 20px;
+  }
+  
+  .star-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    transition: transform 0.2s;
+  }
+  
+  .star-btn:hover, .star-btn.hovered {
+    transform: scale(1.1);
+  }
+  
+  .star {
+    display: inline-block;
+    color: white;
+  }
+  
+  .star.filled {
+    filter: drop-shadow(0 0 2px white);
+  }
+  
+  /* Feedback form styling */
+  .feedback-form {
+    max-width: 800px;
+  }
+  
+  .feedback-form textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    resize: none;
+    font-family: inherit;
+  }
+  
+  .feedback-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .character-count {
+    font-size: 14px;
+    color: #e4e8ee;
+  }
+  
+  .submit-btn {
+    background: white;
+    color: #002044;
+    border: none;
+    padding: 8px 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background: #e4e8ee;
+  }
+  
+  /* Cookie banner - static, not sticky */
+  .cookie-banner {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+  }
+  
+  .cookie-image {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+  
+  /* Main Footer */
+  .footer-main {
+    background-color: #f2f2f2;
+    padding: 40px 0;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  
+  .footer-column {
+    min-width: 140px;
+    margin-bottom: 30px;
+  }
+  
+  .footer-column h3 {
+    color: #444;
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 12px;
+  }
+  
+  .footer-links a {
+    color: #444;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Language Selector */
+  .language-selector {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .globe-icon {
+    margin-right: 8px;
+  }
+  
+  .arrow-icon {
+    margin-left: 8px;
+    font-size: 10px;
+  }
+  
+  /* Brand Section */
+  .footer-brand {
+    background-color: #f2f2f2;
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
+  }
+  
+  .brand-links {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .brand-link {
+    color: #444;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .brand-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Legal Section */
+  .footer-legal {
+    background-color: #f2f2f2;
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
+  }
+  
+  .footer-legal .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .legal-links a {
+    color: #444;
+    text-decoration: none;
+  }
+  
+  .legal-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .copyright {
+    color: #444;
+  }
+  
+  /* Contact Us Button */
+  .contact-us-btn {
+    background-color: #0076CE;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .headset-icon {
+    font-size: 18px;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .footer-container {
+      flex-wrap: wrap;
+    }
+    
+    .footer-column {
+      width: calc(25% - 20px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .footer-column {
+      width: calc(50% - 20px);
+    }
+    
+    .footer-legal .footer-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .legal-links {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .rating-stars {
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .footer-column {
+      width: 100%;
+    }
+  }
+  

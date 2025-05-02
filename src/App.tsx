@@ -14,6 +14,7 @@ import ResourcesSection from './components/sections/ResourcesSection';
 
 import StickyContactButton from './components/StickyContactButton';
 import './index.css';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('products');
@@ -114,6 +115,7 @@ const App: React.FC = () => {
         </section>
         {/* Add more sections here as you create them */}
       </main>
+      <Footer />
       <StickyContactButton />
     </div>
   );
